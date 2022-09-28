@@ -2,7 +2,10 @@
 
 这是我对 go-plugin 仓库中, grpc 例子的极简化,并对项目目录进行了工程向优化, 当然你可以去原网站去观摩原有的代码, 我去掉了其中与 grpc 毫不相关的代码, 比如 netrpc, python-rpc 等, 让代码的可读性增加, 更有利于去了解整个项目的结构
 
-这里是原例的
+这里是原例的地址
+```
+https://github.com/hashicorp/go-plugin/tree/master/examples/grpc
+```
 
 This example builds a simple key/value store CLI where the mechanism
 for storing and retrieving keys is pluggable. To build this example:
@@ -31,6 +34,7 @@ using the following command from this directory. You do not need to run
 this if you're just trying the example.
 
 For Go:
+这里我做了修改, 原因是原版本的 protoc 版本过老, 可以看见Version2, 当前最新版 Version7
 
 ```sh
 $ protoc -I proto/ proto/kv.proto --go-grpc_out=proto/
