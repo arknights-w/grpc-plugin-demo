@@ -1,0 +1,36 @@
+package main
+
+import (
+	"fmt"
+	"os"
+	inner "grpc-plugin/plugin"
+
+	"github.com/hashicorp/go-plugin"
+)
+
+// Here is a real implementation of KV that writes to a local file with
+// the key name and the contents are the value of the key.
+type KV struct{}
+
+func (KV) Put(key string, value []byte) error {
+	value = []byte(fmt.Sprintf("%s\n\nWritten from plugin-go-grpc", string(value)))
+	return os.WriteFile("kv_"+key, value, 0644)
+}
+
+func (KV) Get(key string) ([]byte, error) {
+	return os.ReadFile("kv_" + key)
+}
+
+// 这个就是一个服务端的启动器 
+// server-bootstrap
+func main() {
+	plugin.Serve(&plugin.ServeConfig{
+		HandshakeConfig: inner.Handshake,
+		Plugins: map[string]plugin.Plugin{
+			"kv": &inner.KVGRPCPlugin{Impl: &KV{}},
+		},
+
+		// A non-nil value here enables gRPC serving for this plugin...
+		GRPCServer: plugin.DefaultGRPCServer,
+	})
+}
