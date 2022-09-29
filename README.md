@@ -1,4 +1,4 @@
-# KV Example
+# TextMessage Example
 
 这是我对 go-plugin 仓库中, grpc 例子的极简化,并对项目目录进行了工程向优化, 当然你可以去原网站去观摩原有的代码, 我去掉了其中与 grpc 毫不相关的代码, 比如 netrpc, python-rpc 等, 让代码的可读性增加, 更有利于去了解整个项目的结构
 
@@ -9,7 +9,6 @@ https://github.com/hashicorp/go-plugin/tree/master/examples/grpc
 
 
 ```sh
-
 # This builds the plugin written in Go
 $ make build
 ```
