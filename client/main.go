@@ -17,9 +17,7 @@ func main() {
 	log.SetOutput(io.Discard)
 
 	// We're a host. Start by launching the plugin process.
-	// client-bootstrap
-	// 启动服务器端,同时返回客户端
-	// 注意服务器是在客户端中启起来的
+	// 这个 client 可用于管理 插件子进程 的生命周期
 	// HandshakeConfig	通讯密钥
 	// Plugins			插件集，选择需要的插件进行加载
 	// Cmd				rpc命令，可以选择服务器的二进制程序，同时参数选择服务指令 get,put,send...
@@ -34,6 +32,9 @@ func main() {
 	defer client.Kill()
 
 	// Connect via RPC
+	// 启动服务器端,同时返回客户端
+	// 注意服务器是在客户端中启起来的
+	// client-bootstrap
 	rpcClient, err := client.Client()
 	if err != nil {
 		fmt.Println("Error:", err.Error())
