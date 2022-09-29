@@ -11,6 +11,14 @@ https://github.com/hashicorp/go-plugin/tree/master/examples/grpc
 ```sh
 # This builds the plugin written in Go
 $ make build
+
+# to run this plugin, 
+# you just need to setup bootstrap/client/main
+# you can do this
+$ cd bootstrap/client/
+$ go run .
+# more wisely, try this
+$ make run
 ```
 
 ## Updating the Protocol
@@ -21,6 +29,9 @@ For Go:
 ```sh
 $ protoc -I proto/ proto/kv.proto --go-grpc_out=proto/
 $ protoc -I proto/ proto/kv.proto --go_out=proto/
+
+# otherwise,you can use this command
+$ make protoc
 ```
 
 ## 一些其他需要注意的东西
