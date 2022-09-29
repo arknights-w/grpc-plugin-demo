@@ -1,0 +1,22 @@
+syntax = "proto3";
+package proto;
+
+// use:
+// protoc -I proto/ proto/text_message.proto --go_out=proto/
+// protoc -I proto/ proto/text_message.proto --go-grpc_out=proto/
+
+option go_package = "./;proto";
+
+message Msg{
+    string phone = 1;
+    string text = 2;
+}
+
+message Res {
+    bool result = 1;
+    string msg = 2;
+}
+
+service SendMessage{
+    rpc Send(Msg) returns (Res);
+}

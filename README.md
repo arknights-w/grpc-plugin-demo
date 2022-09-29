@@ -16,6 +16,7 @@ $ go build -o cli ./client
 
 # This builds the plugin written in Go
 $ go build -o srv ./server
+$ go build -o ./bootStrap/client/tencent ./bootStrap/server/
 
 # This tells the KV binary to use the "kv-go-grpc" binary
 $ export KV_PLUGIN="./srv"
