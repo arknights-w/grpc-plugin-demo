@@ -12,7 +12,7 @@ type SMClient struct{
 	Client proto.SendMessageClient
 }
 
-// 注意这里的 Send 是实现 Impl 中的
+// 注意这里的 Send 是实现 intf 中的
 func (sm *SMClient)Send(phone string,text string) intf.Res{
 	// 在这里面调用 grpc 的方法请求后端
 	// 一定注意 context 是 net 包中的 context, 不是标准库的

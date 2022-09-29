@@ -25,7 +25,7 @@ func main(){
 	// 这个 client 可用于管理 插件子进程 的生命周期
 	// HandshakeConfig	通讯密钥
 	// Plugins			插件集，选择需要的插件进行加载
-	// Cmd				rpc命令，可以选择服务器的二进制程序
+	// Cmd				rpc命令，可以选择服务器的二进制程序，这里仅用 TENCENT 举例
 	// AllowedProtocols	允许协议
 	client := plugin.NewClient(&plugin.ClientConfig{
 		HandshakeConfig: inner.Handshake_sm,
