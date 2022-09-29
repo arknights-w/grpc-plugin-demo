@@ -7,32 +7,14 @@
 https://github.com/hashicorp/go-plugin/tree/master/examples/grpc
 ```
 
-This example builds a simple key/value store CLI where the mechanism
-for storing and retrieving keys is pluggable. To build this example:
 
 ```sh
-# This builds the main CLI
-$ go build -o cli ./client
 
 # This builds the plugin written in Go
-$ go build -o srv ./server
-$ go build -o ./bootStrap/client/tencent ./bootStrap/server/
-
-# This tells the KV binary to use the "kv-go-grpc" binary
-$ export KV_PLUGIN="./srv"
-
-# Read and write
-$ ./cli put hello world
-
-$ ./cli get hello
-world
+$ make build
 ```
 
 ## Updating the Protocol
-
-If you update the protocol buffers file, you can regenerate the file
-using the following command from this directory. You do not need to run
-this if you're just trying the example.
 
 For Go:
 这里我做了修改, 原因是原版本的 protoc 版本过老, 可以看见Version2, 当前最新版 Version7
@@ -54,3 +36,5 @@ $ protoc -I proto/ proto/kv.proto --go_out=proto/
 Plugins 作为公共的配置参数,可以将数据存进数据库,每次调用时动态读取
 
 当然在 短信插件中, 一个服务器只有一个 Plugin, 原因是减少代码增量后,对原有代码的重新编译
+
+假设我们现在用的是 腾讯的短信服务，我们将其转为 阿里的短信服务，那么我们需要改动的代码仅限于 bootstrap/server中
