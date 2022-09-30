@@ -9,7 +9,10 @@ https://github.com/hashicorp/go-plugin/tree/master/examples/grpc
 
 
 ```sh
-# This builds the plugin written in Go
+# This builds the plugin written in Go,
+# tencent is filename whitch you can change
+$ go build -o ./bootstrap/client/tencent ./bootstrap/server/
+# or
 $ make build
 
 # to run this plugin, 
@@ -27,8 +30,8 @@ For Go:
 这里我做了修改, 原因是原版本的 protoc 版本过老, 可以看见Version2, 当前最新版 Version7
 
 ```sh
-$ protoc -I proto/ proto/kv.proto --go-grpc_out=proto/
-$ protoc -I proto/ proto/kv.proto --go_out=proto/
+$ protoc -I proto/ proto/text_message.proto --go_out=proto/
+$ protoc -I proto/ proto/text_message.proto --go-grpc_out=proto/
 
 # otherwise,you can use this command
 $ make protoc
@@ -37,6 +40,7 @@ $ make protoc
 ## 一些其他需要注意的东西
 
 一个插件的服务器端, 可以承载多个插件
+
 一个插件的客户端, 可以打开不同的服务器端
 
 服务器端有 Plugins 配置项(实际上客户端也有), 你可以在其中配多个 Plugin
@@ -47,4 +51,4 @@ Plugins 作为公共的配置参数,可以将数据存进数据库,每次调用�
 
 当然在 短信插件中, 一个服务器只有一个 Plugin, 原因是减少代码增量后,对原有代码的重新编译
 
-假设我们现在用的是 腾讯的短信服务，我们将其转为 阿里的短信服务，那么我们需要改动的代码仅限于 bootstrap/server中
+假设我们现在用的是 腾讯的短信服务，我们将其转为 阿里的短信服务，那么我们需要改动的代码仅限于 service/中
