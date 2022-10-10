@@ -1,6 +1,10 @@
 # TextMessage Example
 
-这是我对 go-plugin 仓库中, grpc 例子的极简化,并对项目目录进行了工程向优化, 当然你可以去原网站去观摩原有的代码, 我去掉了其中与 grpc 毫不相关的代码, 比如 netrpc, python-rpc 等, 让代码的可读性增加, 更有利于去了解整个项目的结构
+这是多插件管理方案
+
+对原有grpc-plugin的改写在master分支中
+
+sendMsg分支则将kv案例改为了短信案例
 
 这里是原例的地址
 ```
@@ -9,11 +13,9 @@ https://github.com/hashicorp/go-plugin/tree/master/examples/grpc
 
 
 ```sh
-# This builds the plugin written in Go,
-# tencent is filename whitch you can change
+# 这个命令用于编译插件为一个二进制文件
+# 二进制文件存放于test中，因为测试需要
 $ make build
-
-
 ```
 
 ## Updating the Protocol
@@ -27,16 +29,22 @@ $ make protoc
 
 ## 一些其他需要注意的东西
 
-一个插件的服务器端, 可以承载多个插件
+这里说一下项目结构
+```
+/bootstrap  插件main函数入口，是插件启动器
+            二进制文件就是由他编译得到
 
-一个插件的客户端, 可以打开不同的服务器端
+/config     这包是用于处理配置文件的
 
-服务器端有 Plugins 配置项(实际上客户端也有), 你可以在其中配多个 Plugin
+/plugins    所有的插件都放在这里
+    
+    /plugin1    这是其中一个插件
 
-客户端配置有 cmd 可以选择不同的可执行文件, 每一个可执行文件都是一个独立的服务器
+        /proto      protobuf文件位置
 
-Plugins 作为公共的配置参数,可以将数据存进数据库,每次调用时动态读取
+        /service    业务接口实现
 
-当然在 短信插件中, 一个服务器只有一个 Plugin, 原因是减少代码增量后,对原有代码的重新编译
+/test       一些测试
 
-假设我们现在用的是 腾讯的短信服务，我们将其转为 阿里的短信服务，那么我们需要改动的代码仅限于 service/中
+/tools      对外暴露的函数，比如对插件服务器的创建、销毁插件等
+```
