@@ -1,6 +1,6 @@
 package service
 
-import "grpc-plugin/intf"
+import "grpc-plugin/plugins/send"
 
 // 这个 SM结构体 实现 intf SM接口
 // 服务器运行时，会将这个 SM结构体 注入到 SMServer的Impl 中
@@ -8,8 +8,8 @@ import "grpc-plugin/intf"
 // 其他代码都不需要动
 type SM struct{}
 
-func (SM) Send(phone string, text string) intf.Res {
+func (SM) Send(phone string, text string) send.Res {
 	// TODO:doSomething
 
-	return intf.Res{Reslut: true, Msg: "Succeed"}
+	return send.Res{Reslut: true, Msg: "Succeed"}
 }

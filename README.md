@@ -11,17 +11,9 @@ https://github.com/hashicorp/go-plugin/tree/master/examples/grpc
 ```sh
 # This builds the plugin written in Go,
 # tencent is filename whitch you can change
-$ go build -o ./bootstrap/client/tencent ./bootstrap/server/
-# or
 $ make build
 
-# to run this plugin, 
-# you just need to setup bootstrap/client/main
-# you can do this
-$ cd bootstrap/client/
-$ go run .
-# more wisely, try this
-$ make run
+
 ```
 
 ## Updating the Protocol
@@ -30,10 +22,6 @@ For Go:
 这里我做了修改, 原因是原版本的 protoc 版本过老, 可以看见Version2, 当前最新版 Version7
 
 ```sh
-$ protoc -I proto/ proto/text_message.proto --go_out=proto/
-$ protoc -I proto/ proto/text_message.proto --go-grpc_out=proto/
-
-# otherwise,you can use this command
 $ make protoc
 ```
 

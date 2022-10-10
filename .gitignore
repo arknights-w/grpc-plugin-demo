@@ -2,4 +2,5 @@
 kv
 kv-*
 !kv_*.py
-tencent
+plugins
+!plugins/

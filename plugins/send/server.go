@@ -1,15 +1,15 @@
-package server
+package send
 
 import (
-	"grpc-plugin/intf"
-	"grpc-plugin/proto"
+	"grpc-plugin/plugins/send/proto"
 
 	"golang.org/x/net/context"
 )
 
 // 这是 proto Server的一个实现
 type SMServer struct {
-	Impl intf.SM
+	
+	Impl SM
 	proto.UnimplementedSendMessageServer
 }
 
